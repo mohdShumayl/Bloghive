@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <title>Signup</title>
+        <style>
+            body {
+                background: linear-gradient(135deg, #ffffff, #000000);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            .signup-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .card {
+                width: 900px;
+                border: none;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-left {
+                background: #141518;
+                color: white;
+                padding: 50px 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-bottom-right-radius: 35%;
+                border-top-right-radius: 35%;
+            }
+
+            .card-left h2 {
+                font-weight: bold;
+            }
+
+            .card-left p {
+                margin-top: 10px;
+                font-size: 14px;
+                opacity: 0.9;
+            }
+
+            .card-left .btn {
+                margin-top: 20px;
+                border-radius: 25px;
+                padding: 10px 25px;
+            }
+
+            .card-right {
+                background: #fff;
+                padding: 50px 40px;
+            }
+
+            .form-control {
+                border-radius: 10px;
+                padding: 12px;
+            }
+
+            .btn-primary {
+                border-radius: 25px;
+                padding: 12px;
+                background: #4c6ef5;
+                border: none;
+                width: 100%;
+                font-weight: 500;
+                transition: 0.3s;
+            }
+
+            .btn-primary:hover {
+                background: #3b5bdb;
+            }
+
+            .social-login {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .social-login a {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                background: #f1f3f5;
+                color: #495057;
+                transition: 0.3s;
+            }
+
+            .social-login a:hover {
+                background: #dee2e6;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+        <div class="signup-container">
+            <div class="card d-flex flex-row">
+                <!-- Left Section -->
+                <div class="card-left col-5">
+                    <h2>Welcome Back!</h2>
+                    <p>Already have an account? <br> Login to continue exploring.</p>
+                    <a href="/user/signin" class="btn btn-light">Login</a>
+                </div>
+
+                <!-- Right Section -->
+                <div class="card-right col-7">
+                    <h3 class="mb-4 text-center">Create Account</h3>
+                    <form action="/user/signup" method="post">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email1" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./partials/scripts.js') %>
+            <script src="https://kit.fontawesome.com/your-fontawesome-key.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

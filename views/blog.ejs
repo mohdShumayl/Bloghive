@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %></title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffffff, #000000);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .blog-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+        }
+
+        .blog-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #fff; /* original color */
+        }
+
+        .blog-cover {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .author-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .author-section img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid orange;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-info h5 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #373736; /* original color */
+        }
+
+        .author-info span {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ededed; /* original color */
+        }
+
+        .blog-body {
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            margin-bottom: 3rem;
+        }
+
+        /* Comments Section */
+        .comments-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        /* Input with Button Styling */
+        .input-with-button {
+            position: relative;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-with-button input {
+            width: 100%;
+            padding: 0.8rem 3rem 0.8rem 0.8rem;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 1rem;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .input-with-button input:focus {
+            border-color: orange;
+            box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+        }
+
+        .input-with-button button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background-color: orange;
+            color: #fff;
+            padding: 0.35rem 0.8rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .input-with-button button:hover {
+            background-color: darkorange;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .comment-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+
+        .comment-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid orange;
+        }
+
+        .comment-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #e09e3a;
+            margin-bottom: 4px;
+        }
+
+        .comment-text {
+            margin: 0;
+            color: #ededed;
+            white-space: pre-wrap;
+        }
+
+        .comment-timestamp {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="blog-container">
+        <h1 class="blog-title"><%= blog.title %></h1>
+
+        <img src="<%= blog.coverImageURL %>" alt="cover image" class="blog-cover">
+
+        <div class="author-section">
+            <img src="<%= blog.createdBy.profileImageURL %>" alt="user profile">
+            <div class="author-info">
+                <h5>Created By</h5>
+                <span><%= blog.createdBy.fullName %></span>
+            </div>
+        </div>
+
+        <div class="blog-body"><%= blog.body %></div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h2 class="comments-title">Comments (<%= comments.length %>)</h2>
+
+            <% if (locals.user) { %>
+                <form action="/blog/comment/<%= blog._id %>" method="post" class="comment-form">
+                    <div class="input-with-button">
+                        <input type="text" name="content" placeholder="Write your comment..." required />
+                        <button type="submit">&#10148;</button> <!-- small arrow button -->
+                    </div>
+                </form>
+            <% } else { %>
+                <p class="text-muted">Login to post a comment.</p>
+            <% } %>
+
+            <div class="comments-list">
+                <% comments.forEach(comment => { %>
+                    <div class="comment-item">
+                        <img src="<%= comment.createdBy.profileImageURL %>" alt="Profile" class="comment-avatar">
+                        <div class="comment-content">
+                            <span class="comment-author"><%= comment.createdBy.fullName %></span>
+                            <p class="comment-text"><%= comment.content %></p>
+                            <% if(comment.createdAt){ %>
+                                <span class="comment-timestamp"><%= new Date(comment.createdAt).toLocaleString() %></span>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/scripts.js') %>
+</body>
+
+</html>

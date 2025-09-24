@@ -1,0 +1,22 @@
+{
+  "name": "blogmgtproj-piyush",
+  "version": "1.0.0",
+  "description": "Blog managemnt with user authentication and Authorization along with like comment features ",
+  "license": "ISC",
+  "author": "Shumayl",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2"
+  }
+}
