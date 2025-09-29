@@ -1,8 +1,8 @@
 # Bloghive by Shumayl
-![Bloghive Logo](https://example.com/bloghive-logo.png)
-![Bloghive Logo](https://example.com/bloghive-logo.png)
-![Bloghive Logo](https://example.com/bloghive-logo.png)
-![Bloghive Logo](https://example.com/bloghive-logo.png)
+![Bloghive signup](https://github.com/mohdShumayl/Bloghive/blob/main/public/images/readme/blogHive.png)
+![Bloghive](https://github.com/mohdShumayl/Bloghive/blob/main/public/images/readme/one.png)
+![Bloghive blog](https://github.com/mohdShumayl/Bloghive/blob/main/public/images/readme/two.png)
+![Bloghive comments](https://github.com/mohdShumayl/Bloghive/blob/main/public/images/readme/three.png)
 
 Bloghive is a **full-featured blogging backend** built with **Node.js, Express, and MongoDB**.  
 It supports **user authentication and authorization**, **file uploads using Multer**, and allows users to create, update, and comment on blog posts.
